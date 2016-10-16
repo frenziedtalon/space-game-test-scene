@@ -1,5 +1,6 @@
 ﻿"use strict";
 var runDemo = () => {
+    var fps = $("#fpsLabel");
 
     var canvas = getCanvas();
     var engine = loadBabylonEngine(canvas);
@@ -199,6 +200,7 @@ var runDemo = () => {
         // register a render loop to repeatedly render the scene
         engine.runRenderLoop(() => {
             scene.render();
+            fps.text(engine.getFps().toFixed() + " fps");
         });
     }
 }
