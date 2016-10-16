@@ -148,8 +148,7 @@ var runDemo = () => {
 
     function setCamera(virtual: boolean, distortion: boolean): void {
         scene.activeCamera && scene.activeCamera.detachControl(canvas);
-        //const cameraId = virtual ? (distortion ? "VR-With-Dist" : "VR-No-Dist") : "ArcRotate";
-        const cameraId = virtual ? "VR-With-Dist" : "ArcRotate";
+        const cameraId = virtual ? "VrCamera" : "ArcRotate";
         scene.setActiveCameraByID(cameraId);
         scene.activeCamera.attachControl(canvas);
     }
@@ -157,7 +156,6 @@ var runDemo = () => {
     function createCameras() {
         createArcRotateCamera();
         createVrWithDistortionCamera();
-        createVrNoDistortionCamera();
     }
 
     function createArcRotateCamera() {
@@ -168,8 +166,8 @@ var runDemo = () => {
     }
 
     function createVrWithDistortionCamera() {
-        const camera = new BABYLON.WebVRFreeCamera("VR-With-Dist",
-            new BABYLON.Vector3(0, 0, 0),
+        const camera = new BABYLON.WebVRFreeCamera("VrCamera",
+            new BABYLON.Vector3(-30, 0, -30),
             scene,
             false,
             {
@@ -178,11 +176,7 @@ var runDemo = () => {
                 positionScale: 10
             });
     }
-
-    function createVrNoDistortionCamera() {
-        const camera = new BABYLON.VRDeviceOrientationFreeCamera("VR-No-Dist", new BABYLON.Vector3(0, 0, 0), scene, false);
-    }
-
+    
     function toggleDebugLayer() {
         if (scene.debugLayer.isVisible()) {
             scene.debugLayer.hide();
