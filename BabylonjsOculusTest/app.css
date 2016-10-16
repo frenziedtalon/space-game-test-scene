@@ -1,11 +1,36 @@
 ﻿html, body {
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0; }
-
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+        
 #renderCanvas {
-  width: 100%;
-  height: 100%;
-  touch-action: none; }
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#toggleVr, #fullscreen, #fpsLabel {
+    z-index: 9999;
+    position: absolute;
+}
+
+#toggleVr{
+    top: 0;
+    left: 0;
+}
+
+#fullscreen{
+    top: 0;
+    left: 160px;
+}
+
+#fpsLabel {
+    right: 10px;
+    top: 10px;
+    cursor: default;
+}
