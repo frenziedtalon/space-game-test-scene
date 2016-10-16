@@ -170,7 +170,7 @@ var runDemo = () => {
             false,
             {
                 trackPosition: true,
-                displayName: "HTC Vive MV",
+                displayName: "Oculus VR HMD",
                 positionScale: 10
             });
     }
