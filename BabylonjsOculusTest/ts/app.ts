@@ -136,11 +136,7 @@ var runDemo = () => {
 
         $("#fullscreen")
             .click(() => {
-                if (vr) {
-                    (<BABYLON.WebVRFreeCamera>scene.activeCamera).requestVRFullscreen(false);
-                } else {
-                    engine.switchFullscreen(true);
-                }
+                engine.switchFullscreen(false);
             });
     }
 
