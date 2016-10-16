@@ -122,7 +122,6 @@ var runDemo = () => {
 
         $("#toggleVr")
             .click(() => {
-                debugger;
                 vr = !vr;
                 setCamera(vr, dist);
 
@@ -138,7 +137,6 @@ var runDemo = () => {
         $("#fullscreen")
             .click(() => {
                 if (vr) {
-                    debugger;
                     (<BABYLON.WebVRFreeCamera>scene.activeCamera).requestVRFullscreen(false);
                 } else {
                     engine.switchFullscreen(true);
