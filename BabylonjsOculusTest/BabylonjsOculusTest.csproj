@@ -23,7 +23,19 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app.css" />
+    <Content Include="Assets\Bump.jpg" />
+    <Content Include="Assets\Clouds.png" />
+    <Content Include="Assets\ColorMap.jpg" />
+    <Content Include="Assets\earthnormal2.png" />
+    <Content Include="Assets\earth_bump.jpg" />
     <Content Include="Assets\earth_day.jpg" />
+    <Content Include="Assets\earth_night.jpg" />
+    <Content Include="Assets\earth_specular.jpg" />
+    <Content Include="Assets\NightLights.jpg" />
+    <Content Include="Assets\skysphere-8192x4096.png" />
+    <Content Include="Assets\specular inverted.png" />
+    <Content Include="Assets\specular2.png" />
+    <Content Include="Assets\sun.jpg" />
     <Content Include="index.html" />
     <Content Include="Scripts\babylon.2.5-preview.js" />
     <Content Include="Scripts\hand.minified-1.2.js" />

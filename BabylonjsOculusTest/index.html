@@ -6,16 +6,22 @@
     <title>TypeScript HTML App</title>
     <link rel="stylesheet" href="app.css" type="text/css" />
     <script src="Scripts/app.js"></script>
+    <script src="Scripts/jquery-2.1.4.min.js"></script>
     <script src="Scripts/babylon.2.5-preview.js"></script>
 </head>
 <body>
+    <p>
+        <button type="button" id="toggleVr" class="btn btn-default btn-lg">Toggle WebVR</button>
+        <button type="button" id="distortion" class="btn btn-default btn-lg">Toggle Distortion</button>
+        <button class="btn btn-default btn-lg" id="fullscreen">Full Screen</button>
+    </p>
     <canvas id="renderCanvas"></canvas>
-<script language="javascript">
+    <script language="javascript">
 
-    //function defined in index.js
-    runDemo();
+        //function defined in index.js
+        runDemo();
 
 
-</script>
+    </script>
 </body>
 </html>
