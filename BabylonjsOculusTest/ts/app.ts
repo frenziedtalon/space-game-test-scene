@@ -45,7 +45,7 @@ var runDemo = () => {
         const earth = BABYLON.Mesh.CreateSphere("earth", 50, 5, scene, true);
 
         const material = new BABYLON.StandardMaterial(name, scene);
-        material.diffuseTexture = createTexture("sphereDiffuseTexure", "Assets/ColorMap.jpg");
+        material.diffuseTexture = createTexture("sphereDiffuseTexure", "Assets/earth_day.jpg");
         material.emissiveTexture = createTexture("sphereEmissiveTexure", "Assets/NightLights.jpg");
         material.bumpTexture = createTexture("sphereBumpTexure", "Assets/earthnormal2.png");
         material.specularTexture = createTexture("sphereSpecularTexure", "Assets/earth_specular.jpg");
