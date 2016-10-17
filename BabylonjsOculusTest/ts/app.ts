@@ -42,7 +42,6 @@ var runDemo = () => {
 
     function createEarth(): void {
         const earth = BABYLON.Mesh.CreateSphere("earth", 50, 5, scene, true);
-
         const material = new BABYLON.StandardMaterial("earthMaterial", scene);
         material.diffuseTexture = createTexture("sphereDiffuseTexure", "Assets/earth_day.jpg");
         material.emissiveTexture = createTexture("sphereEmissiveTexure", "Assets/NightLights.jpg");
@@ -50,21 +49,16 @@ var runDemo = () => {
         material.specularTexture = createTexture("sphereSpecularTexure", "Assets/earth_specular.jpg");
         earth.material = material;
 
-        const clouds = BABYLON.Mesh.CreateSphere("earthClouds", 50, 5.05, scene);
-
+        const clouds = BABYLON.Mesh.CreateSphere("earthClouds", 50, 5.1, scene);
         const cloudMaterial = new BABYLON.StandardMaterial("earthCloudMaterial", scene);
-        //cloudMaterial.opacityTexture = createTexture("earthCloudTransparencyTexture", "Assets/fair_clouds.jpg");
-        //cloudMaterial.opacityTexture.getAlphaFromRGB = true;
-        cloudMaterial.diffuseTexture = createTexture("earthCloudMapTexture", "Assets/fair_clouds.jpg");
-        cloudMaterial.diffuseTexture.getAlphaFromRGB = true;
-        //cloudMaterial.diffuseTexture.hasAlpha = true;
         cloudMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
         cloudMaterial.backFaceCulling = true;
-        cloudMaterial.alpha = 0.3;
+        cloudMaterial.opacityTexture = createTexture("earthCloudTransparencyTexture", "Assets/fair_clouds.jpg");
+        cloudMaterial.opacityTexture.getAlphaFromRGB = true;
         clouds.material = cloudMaterial;
-        
-        clouds.position = earth.position;
 
+        clouds.position = earth.position;
+        
         BABYLON.Animation.CreateAndStartAnimation("earthRotation",
             earth,
             "rotation.y",
@@ -74,7 +68,7 @@ var runDemo = () => {
             10,
             BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE);
 
-        BABYLON.Animation.CreateAndStartAnimation("earthRotation",
+        BABYLON.Animation.CreateAndStartAnimation("cloudsRotation",
             clouds,
             "rotation.y",
             30,
