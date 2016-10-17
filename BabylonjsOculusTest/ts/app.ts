@@ -95,7 +95,7 @@ var runDemo = () => {
     }
 
     function createSkySphere(): void {
-        const skysphere = BABYLON.Mesh.CreateSphere("skysphere-" + name, 10, 10000, scene);
+        const skysphere = BABYLON.Mesh.CreateSphere("skysphere-" + name, 10, 20000, scene);
 
         const skysphereMaterial = new BABYLON.StandardMaterial("skysphere-" + name + "-material", scene);
         skysphereMaterial.backFaceCulling = false; // render the inside of the skybox
