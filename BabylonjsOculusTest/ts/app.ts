@@ -47,6 +47,7 @@ var runDemo = () => {
         material.emissiveTexture = createTexture("sphereEmissiveTexure", "Assets/NightLights.jpg");
         material.bumpTexture = createTexture("sphereBumpTexure", "Assets/earthnormal2.png");
         material.specularTexture = createTexture("sphereSpecularTexure", "Assets/earth_specular.jpg");
+        material.specularPower = 10000;
         earth.material = material;
 
         const clouds = BABYLON.Mesh.CreateSphere("earthClouds", 50, 5.1, scene);
