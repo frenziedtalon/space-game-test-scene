@@ -13,7 +13,6 @@ var runDemo = () => {
     createSkySphere();
 
     var vr = false;
-    var dist = true;
 
     function getCanvas(): HTMLCanvasElement {
         return <HTMLCanvasElement>document.getElementById("renderCanvas");
@@ -123,15 +122,7 @@ var runDemo = () => {
         $("#toggleVr")
             .click(() => {
                 vr = !vr;
-                setCamera(vr, dist);
-
-                $("#fullscreen").text(vr ? "Enter VR" : "Full Screen");
-            });
-
-        $("#distortion")
-            .click(() => {
-                dist = !dist;
-                setCamera(vr, dist);
+                setCamera(vr);
             });
 
         $("#fullscreen")
@@ -140,7 +131,7 @@ var runDemo = () => {
             });
     }
 
-    function setCamera(virtual: boolean, distortion: boolean): void {
+    function setCamera(virtual: boolean): void {
         scene.activeCamera && scene.activeCamera.detachControl(canvas);
         const cameraId = virtual ? "VrCamera" : "ArcRotate";
         scene.setActiveCameraByID(cameraId);
