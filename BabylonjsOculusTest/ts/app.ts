@@ -74,7 +74,7 @@ var runDemo = () => {
         material.emissiveTexture = createTexture("sphereDiffuseTexure", "Assets/sun.jpg");
 
         sun.material = material;
-        sun.position.x -= 100;
+        sun.position = new BABYLON.Vector3(0, 0, 20);
 
         // create god rays effect
         var vls = new BABYLON.VolumetricLightScatteringPostProcess("sunVls", 1.0, scene.activeCamera, sun, 100, BABYLON.Texture.BILINEAR_SAMPLINGMODE, engine, false);
@@ -152,7 +152,7 @@ var runDemo = () => {
 
     function createVrWithDistortionCamera() {
         const camera = new BABYLON.WebVRFreeCamera("VrCamera",
-            new BABYLON.Vector3(-30, 0, -30),
+            new BABYLON.Vector3(4, 0, 0),
             scene,
             false,
             {
