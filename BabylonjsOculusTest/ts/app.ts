@@ -167,6 +167,7 @@ var runDemo = () => {
         camera.lowerRadiusLimit = 5;
         camera.upperRadiusLimit = 15;
         camera.attachControl(canvas, true);
+        camera.inputs.add(new BABYLON.ArcRotateCameraGamepadInput());
     }
 
     function createVrWithDistortionCamera() {
@@ -175,10 +176,11 @@ var runDemo = () => {
             scene,
             false,
             {
-                trackPosition: true,
+                trackPosition: false,
                 displayName: "Oculus VR HMD",
                 positionScale: 10
             });
+        camera.inputs.add(new BABYLON.FreeCameraGamepadInput());
     }
     
     function toggleDebugLayer() {
