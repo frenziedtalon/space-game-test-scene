@@ -53,7 +53,7 @@ var runDemo = () => {
         const clouds = BABYLON.Mesh.CreateSphere("earthClouds", 50, 5.1, scene);
         const cloudMaterial = new BABYLON.StandardMaterial("earthCloudMaterial", scene);
         cloudMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
-        cloudMaterial.backFaceCulling = true;
+        cloudMaterial.backFaceCulling = false;
         cloudMaterial.opacityTexture = createTexture("earthCloudTransparencyTexture", "Assets/fair_clouds.jpg");
         cloudMaterial.opacityTexture.getAlphaFromRGB = true;
         clouds.material = cloudMaterial;
