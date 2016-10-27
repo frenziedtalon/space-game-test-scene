@@ -33,6 +33,7 @@ var runDemo = () => {
         createEarth();
         //createLight();
         createSun();
+        createSaturn();
     }
 
     function createLight(): void {
@@ -112,6 +113,72 @@ var runDemo = () => {
             BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE);
     }
 
+    function createSaturn(): void {
+        const saturn = BABYLON.Mesh.CreateSphere("saturn", 50, 5, scene, true);
+
+        saturn.position = new BABYLON.Vector3(20, 0, 20);
+
+        const material = new BABYLON.StandardMaterial("saturnMaterial", scene);
+        material.diffuseTexture = createTexture("saturnDiffuseTexure", "Assets/saturn.jpg");
+        //material.emissiveTexture = createTexture("sphereEmissiveTexure", "Assets/NightLights.jpg");
+        //material.bumpTexture = createTexture("sphereBumpTexure", "Assets/earthnormal2.png");
+        //material.specularTexture = createTexture("sphereSpecularTexure", "Assets/earth_specular.jpg");
+        //material.specularPower = 10000;
+        material.ambientColor = new BABYLON.Color3(0.1, 0.1, 0.1);
+        saturn.material = material;
+
+        const torus: BABYLON.Mesh = BABYLON.MeshBuilder.CreateTorus("torus", {
+                thickness: 10,
+                diameter: 25,
+                tessellation: 200,
+                sideOrientation: BABYLON.Mesh.DOUBLESIDE
+            },
+            scene);
+
+        torus.isPickable = false;
+        torus.scaling = new BABYLON.Vector3(1, 0.001, 1);
+
+        
+
+        torus.parent = saturn;
+
+        const diffuseTexture = new BABYLON.Texture("Assets/saturnringcolor.jpg", scene);
+        diffuseTexture.wAng = 3 * Math.PI / 2;
+        diffuseTexture.uScale = 2;
+        diffuseTexture.vScale = 2;
+
+        const opacityTexture = new BABYLON.Texture("Assets/saturnringpattern.gif", scene);
+        opacityTexture.wAng = 3 * Math.PI / 2;
+        opacityTexture.uScale = 2;
+        opacityTexture.vScale = 2;
+
+
+
+
+        const m = new BABYLON.StandardMaterial(name, scene);
+        m.opacityTexture = opacityTexture;
+        m.opacityTexture.getAlphaFromRGB = true;
+        m.diffuseTexture = diffuseTexture;
+
+        m.ambientColor = new BABYLON.Color3(0.1, 0.1, 0.1);
+
+        torus.material = m;
+
+        saturn.rotation.x = Math.PI / 4;
+        saturn.rotation.y = Math.PI / 4;
+        saturn.rotation.z = Math.PI / 4;
+
+
+        BABYLON.Animation.CreateAndStartAnimation("saturnRotation",
+            saturn,
+            "rotation.y",
+            30,
+            4000,
+            0,
+            10,
+            BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE);
+    }
+
     function createSkySphere(): void {
         const skysphere = BABYLON.Mesh.CreateSphere("skysphere-" + name, 10, 20000, scene);
 
@@ -165,7 +232,7 @@ var runDemo = () => {
     function createArcRotateCamera() {
         const camera = new BABYLON.ArcRotateCamera("ArcRotate", 3.410466872478024, 0.8267117010449241, 6, BABYLON.Vector3.Zero(), scene);
         camera.lowerRadiusLimit = 5;
-        camera.upperRadiusLimit = 15;
+        camera.upperRadiusLimit = 25;
         camera.attachControl(canvas, true);
         camera.inputs.add(new BABYLON.ArcRotateCameraGamepadInput());
     }

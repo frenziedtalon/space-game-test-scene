@@ -32,6 +32,10 @@
     <Content Include="Assets\earth_night.jpg" />
     <Content Include="Assets\earth_specular.jpg" />
     <Content Include="Assets\NightLights.jpg" />
+    <Content Include="Assets\saturn.jpg" />
+    <Content Include="Assets\saturnringcolor.jpg" />
+    <Content Include="Assets\saturnringpattern.gif" />
+    <Content Include="Assets\saturn_ring.png" />
     <Content Include="Assets\skysphere-8192x4096.png" />
     <Content Include="Assets\specular inverted.png" />
     <Content Include="Assets\specular2.png" />
