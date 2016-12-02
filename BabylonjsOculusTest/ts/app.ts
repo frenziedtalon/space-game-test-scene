@@ -68,7 +68,7 @@ var runDemo = () => {
             4000,
             0,
             10,
-            BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE);
+            BABYLON.Animation.ANIMATIONLOOPMODE_RELATIVE);
 
         BABYLON.Animation.CreateAndStartAnimation("cloudsRotation",
             clouds,
@@ -77,7 +77,7 @@ var runDemo = () => {
             4500,
             0,
             10,
-            BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE);
+            BABYLON.Animation.ANIMATIONLOOPMODE_RELATIVE);
     }
 
     function createTexture(name: string, texture: string): BABYLON.Texture {
