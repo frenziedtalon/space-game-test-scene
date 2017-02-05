@@ -30,7 +30,7 @@ var runDemo = () => {
     }
 
     function createSceneObjects() {
-        createEarth();
+        //createEarth();
         //createLight();
         createSun();
         createSaturn();
@@ -60,7 +60,7 @@ var runDemo = () => {
         clouds.material = cloudMaterial;
 
         clouds.position = earth.position;
-        
+
         BABYLON.Animation.CreateAndStartAnimation("earthRotation",
             earth,
             "rotation.y",
@@ -116,58 +116,21 @@ var runDemo = () => {
     function createSaturn(): void {
         const saturn = BABYLON.Mesh.CreateSphere("saturn", 50, 5, scene, true);
 
-        saturn.position = new BABYLON.Vector3(20, 0, 20);
+        //saturn.position = new BABYLON.Vector3(20, 0, 20);
 
         const material = new BABYLON.StandardMaterial("saturnMaterial", scene);
-        material.diffuseTexture = createTexture("saturnDiffuseTexure", "Assets/saturn.jpg");
-        //material.emissiveTexture = createTexture("sphereEmissiveTexure", "Assets/NightLights.jpg");
-        //material.bumpTexture = createTexture("sphereBumpTexure", "Assets/earthnormal2.png");
-        //material.specularTexture = createTexture("sphereSpecularTexure", "Assets/earth_specular.jpg");
-        //material.specularPower = 10000;
+        material.diffuseTexture = createTexture("saturnDiffuseTexure", "Assets/saturn-cassini2.jpg");
+
         material.ambientColor = new BABYLON.Color3(0.1, 0.1, 0.1);
         saturn.material = material;
 
-        const torus: BABYLON.Mesh = BABYLON.MeshBuilder.CreateTorus("torus", {
-                thickness: 10,
-                diameter: 25,
-                tessellation: 200,
-                sideOrientation: BABYLON.Mesh.DOUBLESIDE
-            },
-            scene);
+        const ribbon = generateRibbonRings();
 
-        torus.isPickable = false;
-        torus.scaling = new BABYLON.Vector3(1, 0.001, 1);
-
-        
-
-        torus.parent = saturn;
-
-        const diffuseTexture = new BABYLON.Texture("Assets/saturnringcolor.jpg", scene);
-        diffuseTexture.wAng = 3 * Math.PI / 2;
-        diffuseTexture.uScale = 2;
-        diffuseTexture.vScale = 2;
-
-        const opacityTexture = new BABYLON.Texture("Assets/saturnringpattern.gif", scene);
-        opacityTexture.wAng = 3 * Math.PI / 2;
-        opacityTexture.uScale = 2;
-        opacityTexture.vScale = 2;
-
-
-
-
-        const m = new BABYLON.StandardMaterial(name, scene);
-        m.opacityTexture = opacityTexture;
-        m.opacityTexture.getAlphaFromRGB = true;
-        m.diffuseTexture = diffuseTexture;
-
-        m.ambientColor = new BABYLON.Color3(0.1, 0.1, 0.1);
-
-        torus.material = m;
+        ribbon.parent = saturn;
 
         saturn.rotation.x = Math.PI / 4;
         saturn.rotation.y = Math.PI / 4;
         saturn.rotation.z = Math.PI / 4;
-
 
         BABYLON.Animation.CreateAndStartAnimation("saturnRotation",
             saturn,
@@ -176,7 +139,7 @@ var runDemo = () => {
             4000,
             0,
             10,
-            BABYLON.Animation.ANIMATIONLOOPMODE_CYCLE);
+            BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
     }
 
     function createSkySphere(): void {
@@ -232,7 +195,7 @@ var runDemo = () => {
     function createArcRotateCamera() {
         const camera = new BABYLON.ArcRotateCamera("ArcRotate", 3.410466872478024, 0.8267117010449241, 6, BABYLON.Vector3.Zero(), scene);
         camera.lowerRadiusLimit = 5;
-        camera.upperRadiusLimit = 25;
+        camera.upperRadiusLimit = 50;
         camera.attachControl(canvas, true);
         camera.inputs.add(new BABYLON.ArcRotateCameraGamepadInput());
     }
@@ -249,7 +212,7 @@ var runDemo = () => {
             });
         camera.inputs.add(new BABYLON.FreeCameraGamepadInput());
     }
-    
+
     function toggleDebugLayer() {
         if (scene.debugLayer.isVisible()) {
             scene.debugLayer.hide();
@@ -269,5 +232,58 @@ var runDemo = () => {
             scene.render();
             fps.text(engine.getFps().toFixed() + " fps");
         });
+    }
+
+    function generateCircularPath(radius: number): Array<BABYLON.Vector3> {
+        const result: Array<BABYLON.Vector3> = [];
+        const step = Math.PI / 128;
+
+        for (let angle = 0; angle < 2 * Math.PI; angle += step) {
+            result.push(calculationParametricCoordinatesCircle(angle, radius));
+        }
+
+        return result;
+    }
+
+    function calculationParametricCoordinatesCircle(angle: number, radius: number): BABYLON.Vector3 {
+        const z = radius * Math.cos(angle);
+        const x = radius * Math.sin(angle);
+        const y = 0;
+
+        return new BABYLON.Vector3(x, y, z);
+    }
+
+    function generateRibbonRings(): BABYLON.Mesh {
+
+        const innerPath = generateCircularPath(7);
+        const outerPath = generateCircularPath(20);
+
+        const paths = [];
+        paths.push(innerPath);
+        paths.push(outerPath);
+
+        const options = {
+            pathArray: paths,
+            closeArray: false,
+            closePath: true,
+            sideOrientation: BABYLON.Mesh.DOUBLESIDE,
+            invertUV: true
+        }
+
+        const ribbon = BABYLON.MeshBuilder.CreateRibbon("ribbon", options, scene);
+
+        const diffuseTexture = new BABYLON.Texture("Assets/saturn-rings-backscattered.png", scene);
+
+        const opacityTexture = new BABYLON.Texture("Assets/saturn-rings-backscattered.png", scene);
+
+        const material = new BABYLON.StandardMaterial(name, scene);
+        material.opacityTexture = opacityTexture;
+        material.opacityTexture.getAlphaFromRGB = true;
+        material.diffuseTexture = diffuseTexture;
+        material.ambientColor = new BABYLON.Color3(0.1, 0.1, 0.1);
+
+        ribbon.material = material;
+
+        return ribbon;
     }
 }
